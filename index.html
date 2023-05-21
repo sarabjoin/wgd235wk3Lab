@@ -10,9 +10,16 @@
         body {
             margin: 25px;
         }
-        #myForm {                  
-            width: 70%x;
-            display: none; /* add this */               
+        #myForm {
+            display: none;
+            position: fixed;
+            z-index: 1; /*sit on top */
+            bottom: 75px;
+            left: 150px;                  
+            width: 70%;
+            overflow: auto; /*enable scroll if needed */
+            
+            animation:animatetop 0.4s ease;
         }
 
        #close, #main,
@@ -24,8 +31,44 @@
             margin-right: 15px;
             padding: 15px;
             float:left;
-        }        
+        }
+        
+        @keyframes animatetop{
+            from {
+                left:-100px;
+                opacity: 0;
+            }
+            to {
+                left:75px;
+                opacity: 1;
+            }
+        }
+
     </style>    
+    
+    <script>
+        window.onload = function(){
+            console.log("document.onload", Date.now());
+
+            var myBtn = document.querySelector("#myBtn");
+            myBtn.addEventListener("click", openForm, false);
+
+            var close = document.querySelector("#close");
+            close.addEventListener("click", closeMe, false);
+
+            var myForm = document.querySelector("#myForm");
+
+            function openForm(){
+                //Unhide form
+                myForm.style.display = "block";
+            }
+
+            function closeMe(){
+                //Hide form
+                myForm.style.display = "none";
+            }
+        }
+    </script>
 </head>
 
 <body>
